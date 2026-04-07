@@ -1,0 +1,23 @@
+
+body {
+    padding: 0;
+    margin: 0;
+}
+html, body, #map {
+    height: 100%;
+    width: 100vw;
+}
+
+#map { height: 100vh; }
+.cont-poup{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.cont-poup > h4{
+    color: #ad4658;
+    font-weight: 500;
+    text-align: center;
+     font-family: "Pacifico", cursive;
+}
