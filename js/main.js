@@ -13,17 +13,31 @@ var circle = L.circle([-11.89802, -75.31815], {
 }).addTo(map);
 marker.bindPopup("<div class='cont-poup'><h4>Nuestro Matrimonio</h4> <img src='./img/matrimonio.png' alt='Matrimonio' width='100px'></div>").openPopup();
 circle.bindPopup("Por favor.");
-
-
-L.Routing.control({
+ if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var lat = position.coords.latitude;
+  var lon = position.coords.longitude;
+  var miUbicacion = L.latLng(lat, lon);
+  L.marker(miUbicacion).bindPopup("<div class='cont-poup'><h4>Nuestro Matrimonio</h4> <img src='./img/matrimonio.png' alt='Matrimonio' width='100px'></div>").openPopup();
+  
+  L.Routing.control({
   waypoints: [
-    L.latLng(-12.069619, -75.212724),
-    L.latLng(-11.89802, -75.31815)
+    
+    L.latLng(-11.89802, -75.31815),
+     miUbicacion,
    
   ],
    language: 'es', 
-    showAlternatives: true,
     routeWhileDragging: true,
+    }).addTo(map);
+      }, function(error) {
+        console.error("Error al obtener ubicación: " + error.message);
+    });
+} else {
+    alert("La geolocalización no es soportada por este navegador");
+}
+
+
     
-}).addTo(map);
+
 //-12.069619, -75.212724
